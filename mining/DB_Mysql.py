@@ -212,7 +212,10 @@ class DB_Mysql():
         row = self.dbc.fetchone()
 
         if row is None:
-            return False
+            log.debug("[HACK] Adding new username for guest access : %s", username)
+            self.execute("INSERT INTO accounts (username) VALUES (%s)", (uname))
+            return self.lastrowid
+
         else:
             uid = row[0]
             return uid
