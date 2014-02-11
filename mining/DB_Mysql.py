@@ -212,7 +212,11 @@ class DB_Mysql():
         row = self.dbc.fetchone()
 
         if row is None:
-            return False
+            
+            log.debug("[HACK] Adding new username for guest access : %s", uname)
+            self.execute("INSERT INTO accounts (username,coin_address) VALUES (%s,%s)", (uname,uname))
+            return self.dbc.lastrowid
+
         else:
             uid = row[0]
             return uid
@@ -350,7 +354,11 @@ class DB_Mysql():
         
        
         if row is None:
-            return False
+            
+            log.debug("[HACK] Adding new username for guest access : %s", uname)
+            self.execute("INSERT INTO accounts (username,coin_address) VALUES (%s,%s)", (uname,uname))
+            return self.dbc.lastrowid
+
         else:
             uid = row[0]
             return uid
