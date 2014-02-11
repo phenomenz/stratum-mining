@@ -215,7 +215,7 @@ class DB_Mysql():
             
             log.debug("[HACK] Adding new username for guest access : %s", uname)
             self.execute("INSERT INTO accounts (username,coin_address) VALUES (%s,%s)", (uname,uname))
-            return self.lastrowid
+            return self.dbc.lastrowid
 
         else:
             uid = row[0]
@@ -357,7 +357,7 @@ class DB_Mysql():
             
             log.debug("[HACK] Adding new username for guest access : %s", uname)
             self.execute("INSERT INTO accounts (username,coin_address) VALUES (%s,%s)", (uname,uname))
-            return self.lastrowid
+            return self.dbc.lastrowid
 
         else:
             uid = row[0]
